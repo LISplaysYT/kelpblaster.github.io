@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KelpBlaster Download</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      color: #00ffcc;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0,255,150,0.2), transparent 70%);
+      top: 0;
+      left: 0;
+      animation: floatGlow 8s infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes floatGlow {
+      from { transform: translate(0,0); }
+      to { transform: translate(200px,150px); }
+    }
+
+    .container, .versions-page {
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: none;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1, h2, h3, p {
+      color: #00ffcc;
+    }
+
+    * {
+      transition: all 0.25s ease;
+    }
+
+    .card, .stat-box {
+      background: rgba(0,0,0,0.3);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      backdrop-filter: blur(15px);
+      margin: 15px 0;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card:hover, .download-btn:hover, .preview img:hover {
+      transform: scale(1.05);
+    }
+
+    .stats:hover .stat-box {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+
+    .stat-box:hover {
+      transform: scale(1.15) !important;
+      opacity: 1 !important;
+    }
+
+    .download-btn {
+      display: block;
+      margin: 15px auto 0 auto;
+      padding: 12px 30px;
+      font-size: 1rem;
+      background: linear-gradient(90deg, #007f33, #00c853);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #00ffcc;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,255,150,0.6);
+    }
+
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      background: conic-gradient(from 0deg, transparent, rgba(0,255,150,0.5), transparent);
+      animation: rotate 4s linear infinite;
+      top: -100%;
+      left: -100%;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .download-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 40px rgba(0,255,200,1);
+    }
+
+    .stats {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .preview {
+      margin-top: 50px;
+    }
+
+    .preview img {
+      width: 90%;
+      max-width: 550px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+    footer {
+      margin-top: 70px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🌊 KelpBlaster</h1>
+    <p>By LIS • Ultra Fast Minecraft Kelp Farm</p>
+
+    <div class="card">
+      <h2>⚡ Features</h2>
+      <p>- Extremely fast kelp production</p>
+      <p>- Fully automatic</p>
+      <p>- Compact redstone design</p>
+      <p>- Server friendly</p>
+      <p>- Easy to build</p>
+    </div>
+
+    <button class="download-btn" onclick="showVersions()"><span>Download KelpBlaster</span></button>
+
+    <div class="stats">
+      <div class="stat-box">
+        <h3>⚡ Speed</h3>
+        <p>Insane</p>
+      </div>
+      <div class="stat-box">
+        <h3>📦 Size</h3>
+        <p>Compact</p>
+      </div>
+      <div class="stat-box">
+        <h3>🛌 AFK</h3>
+        <p>Yes</p>
+      </div>
+    </div>
+
+    <div class="preview">
+      <h2>📸 Preview</h2>
+      <img src="preview.png" alt="KelpBlaster Preview">
+    </div>
+
+    <footer>
+      © 2026 LIS • KelpBlaster Project
+    </footer>
+  </div>
+
+  <div class="versions-page" style="display:none;">
+    <h1>📦 Versions</h1>
+    <p>Select a version to download</p>
+
+    <div class="stats">
+      <div class="card" onclick="downloadVersion('kelpblasterv1.litematic')">
+        <h3>v1.0</h3>
+        <p>- 100 Smokers</p>
+        <p>- Fast</p>
+        <p>- Beginner Friendly</p>
+        <p>- DonutSMP tested</p>
+        <button class="download-btn" onclick="event.stopPropagation(); downloadVersion('kelpblasterv1.litematic')"><span>Download</span></button>
+      </div>
+      <!-- Add more version cards here -->
+    </div>
+
+    <button class="download-btn" onclick="backToMain()"><span>⬅ Back</span></button>
+  </div>
+
+  <script>
+    function showVersions() {
+      document.querySelector('.container').style.display = 'none';
+      document.querySelector('.versions-page').style.display = 'flex';
+    }
+
+    function backToMain() {
+      document.querySelector('.versions-page').style.display = 'none';
+      document.querySelector('.container').style.display = 'flex';
+    }
+
+    function downloadVersion(file) {
+      const link = document.createElement('a');
+      link.href = file;
+      link.download = file;
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
